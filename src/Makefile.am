@@ -1,4 +1,11 @@
-bin_SCRIPTS = kalite-app
+bin_SCRIPTS = \
+	kalite-app \
+	kalite-start \
+	$(NULL)
+
+%: %.sh
+	cp $< $@
+	chmod a+x $@
 
 %: %.py
 	cp $< $@
