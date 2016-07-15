@@ -2,6 +2,7 @@
 
 base_dir="/var/lib/kalite"
 content_dir="${base_dir}/content"
+assessment_dir="${content_dir}/assessment"
 
 # This function checks if there's any pre-loaded files with
 # language (content packs), importing them into KA Lite if
@@ -37,6 +38,10 @@ install_language_packs() {
 
     touch ${done_file}
 }
+
+# Make sure there's access to the assessment data
+mkdir -p ${content_dir}
+ln -snf /app/share/kalite/assessment ${assessment_dir}
 
 # This is a no-op if the language packs were installed.
 install_language_packs
