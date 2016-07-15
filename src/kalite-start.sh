@@ -1,6 +1,7 @@
 #!/bin/bash
 
 base_dir="/var/lib/kalite"
+preloaded_dir="${base_dir}/PRELOADED"
 content_dir="${base_dir}/content"
 assessment_dir="${content_dir}/assessment"
 
@@ -16,8 +17,8 @@ install_language_packs() {
         return
     fi
 
-    if [ -e ${done_file} ]; then
-        echo "Contentpacks already imported"
+    if [ ! -d ${preloaded_dir} ]; then
+        echo "No preloaded contentpacks found"
         return
     fi
 
@@ -25,18 +26,23 @@ install_language_packs() {
     kalite manage setup -n
 
     # check if we have any uninstalled language pack first.
-    for f in $(find ${content_dir} -type f -name "*.zip"); do
+    had_errors=false
+    for f in $(find ${preloaded_dir} -type f -name "*.zip"); do
         lang=$(basename $f | sed s/'-minimal'//g | sed s/'.zip'//g)
         kalite manage retrievecontentpack local $lang $f
         if [ $? -eq 0 ]; then
-            echo "Language pack '$f' successfully installed. Removing zip file..."
-            rm -f $f
+            echo "Language pack '${f}' successfully installed. Removing..."
+            rm -f ${f}
         else
-            echo "Could not install language pack '$f'"
+            echo "Could not install language pack '${f}'"
+            had_errors=true
         fi
     done
 
-    touch ${done_file}
+    if ! had_errors; then
+        echo "All language packs successfully installed."
+        rm -rf ${preloaded_dir}
+    fi
 }
 
 # Make sure there's access to the assessment data
