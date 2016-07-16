@@ -1,9 +1,5 @@
 #!/usr/bin/make -f
 #export DH_VERBOSE = 1
 
-override_dh_autoreconf:
-	NOCONFIGURE=1 ./autogen.sh
-	dh_autoreconf
-
 %:
 	dh $@ --with autoreconf
