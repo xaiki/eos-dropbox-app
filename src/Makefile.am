@@ -1,13 +1,8 @@
 dist_bin_SCRIPTS = \
-	kalite-app \
-	kalite-start \
+	dropbox-start \
 	$(NULL)
 
 %: %.sh
-	cp $< $@
-	chmod a+x $@
-
-%: %.py
 	cp $< $@
 	chmod a+x $@
 

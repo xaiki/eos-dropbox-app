@@ -1,17 +1,17 @@
-Source: kalite-app
+Source: dropbox-app
 Section: admin
 Priority: standard
-Maintainer: Mario Sanchez Prada <mario@endlessm.com>
+Maintainer: Niv Sardi <xaiki@endlessm.com>
 Build-Depends: debhelper (>= 9),
 	dh-autoreconf,
 	intltool
 Standards-Version: 3.8.0
 Homepage: http://www.endlessm.com
-XCBS-EOS-AppId: kalite-app
+XCBS-EOS-AppId: dropbox-app
 
-Package: kalite-app
-Architecture: any
+Package: dropbox-app
+Architecture: all
 Depends: ${misc:Depends}
-Description: KA Lite wrapper application
+Description: Dropbox wrapper application
  Small package to contain the "client side" bits of the
- KA Lite application (launcher script, .desktop file...)
+ Dropbox application (launcher script)
